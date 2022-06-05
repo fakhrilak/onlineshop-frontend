@@ -22,6 +22,7 @@ const Login = ({loginAction, auth}) => {
  
   const OnClick = () => {
     loginAction(email, password)
+    console.log("masuk sini dongs")
   }
   useEffect(()=>{
     return(()=>{
@@ -41,7 +42,7 @@ const Login = ({loginAction, auth}) => {
     <>
     {
       isAuthenticated ?
-        (<Redirect to="/dashboard"/>) :
+        (<Redirect to="/item"/>) :
       (<main className="">
       <div className="">
         <section className="relative w-full h-full py-10 min-h-screen bg-green-300">

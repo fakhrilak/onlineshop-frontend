@@ -6,7 +6,8 @@ import { connect,useDispatch} from "react-redux";
 const Register = ({SignUp, auth}) => {
     const {message, isAuthenticated} = auth
 
-    const [username, setUsername] = useState()
+    const [firstname, setFirstname] = useState()
+    const [lastname, setLastname] = useState()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const dispatch = useDispatch()
@@ -17,7 +18,7 @@ const Register = ({SignUp, auth}) => {
     //     })
     // },[])
     const OnClick = () => {
-        SignUp(username, email, password)
+        SignUp(firstname,lastname, email, password)
     }
 
 
@@ -25,7 +26,7 @@ const Register = ({SignUp, auth}) => {
     <>
   {
       isAuthenticated ?
-        (<Redirect to="/dashboard"/>) :
+        (<Redirect to="/item"/>) :
       (<main>
         <section className="bg-emerald-700 relative w-full h-full py-20 min-h-screen">
           <div
@@ -61,17 +62,31 @@ const Register = ({SignUp, auth}) => {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Username
+                      First name
                     </label>
                     <input
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Name"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                      placeholder="First name"
+                      value={firstname}
+                      onChange={(e) => setFirstname(e.target.value)}
                     />
                   </div>
-
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Last Name"
+                      value={lastname}
+                      onChange={(e) => setLastname(e.target.value)}
+                    />
+                  </div>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"

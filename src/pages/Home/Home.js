@@ -44,7 +44,7 @@ const Home = ({auth,location}) => {
           </div>
       </div>
      
-      </div>:<Redirect to="/dashboard"/>}
+      </div>:<Redirect to="/item"/>}
     </div>
   );
 };

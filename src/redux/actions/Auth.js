@@ -28,10 +28,11 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 
-export const SignUp = (username, email, password) => async(dispatch) => {
+export const SignUp = (firstname,lastname, email, password) => async(dispatch) => {
   try {
       const body = {
-          username: username,
+          firstname: firstname,
+          lastname:lastname,
           email: email,
           password: password       
       }
@@ -44,6 +45,7 @@ export const SignUp = (username, email, password) => async(dispatch) => {
           payload: res.data
       });
       dispatch(loadUser())
+      window.location.reload("/item")
   }catch(err) {
       dispatch({
           type: LOGIN_FAIL,
@@ -66,6 +68,7 @@ export const loginAction = (email, password) => async(dispatch) => {
             type: LOGIN_SUCCESS,
             payload: res.data.data,
         });
+        window.location.reload("/item")
     }catch(err) {
         dispatch({
             type: LOGIN_FAIL,

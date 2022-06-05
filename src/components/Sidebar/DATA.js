@@ -7,98 +7,42 @@ import transaction from "../../img/transaction.png"
 
 export const sidebarAdmin = [
     {
-        name : "DASHBOARD",
-        route : "/dashboard"
+        name : "ITEM",
+        route : "/item"
     },
     {
-        name : "HIRARKI",
-        route : "/hirarki"
+        name : "ANTAR TO DAY",
+        route : "/antartoday"
     },
     {
         name : "PROFILE",
         route : "/profile"
     },
     {
-        name : "SUPLIER",
-        route : "/suplier"
-    },
-    {
-        name: "SENSOR",
-        route : "/sensor"
-    },
-    {
-        name:"ACTUATORS",
-        route:"/actuator"
-    },
-    {
-        name : "WEIGHT",
-        route : "/my-got"
-    },
-    {
-        name : "CCTV",
-        route:"/stream"
-    },
-    {
-        name : "CONTROLLER",
-        route :"/control-timbangan"
-    },
-    {
-        name : "INVESTOR",
-        route : "/investor"
-    },
-    {
-        name : "KAMBING",
-        route : "/kambing"
-    },
-    {
-        name  : "CLASS",
-        route : "/class"
-    },
-    {
         name : "TRANSAKSI",
-        route:"/transaksi"
+        route : "/transaksi"
     },
     {
-        name: "COMPONENST",
-        route:"/components"
+        name : "ADD ITEM",
+        route : "/additem"
     }
 ]
 export const notAllowed = ["/register","/","/login"]
 export const sidebarUser = [
     {
-        name : "DASHBOARD",
-        route : "/dashboard",
-        state : false,
-        img : dashbord
+        name : "ITEM",
+        route : "/item"
     },
     {
         name : "PROFILE",
-        route : "/profile",
-        state : true,
-        img : profile
-    },
-    {
-        name : "WEIGHT",
-        route : "/my-got",
-        state : true,
-        img : weight
-    },
-    {
-        name : "KAMBING",
-        route : "/kambing",
-        state : false,
-        img : goat
+        route : "/profile"
     },
     {
         name : "TRANSAKSI",
-        route : "/transaksi",
-        state : true,
-        img : transaction
+        route : "/transaksi"
     },
     {
-        name : "ORDER",
-        route : "/order",
-        state:true,
-        img : order
+        name : "KERANJANG",
+        route : "/keranjang"
     }
 ]

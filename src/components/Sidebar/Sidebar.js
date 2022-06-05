@@ -43,9 +43,9 @@ const Sidebar = (props) => {
             </div>
             <Link
               className="md:block md:pb-2 text-lg text-blueGray-600 mr-0 inline-block whitespace-nowrap uppercase font-bold p-4 px-0"
-              to="/"
+              to="/item"
             >
-              Kandang 4.0
+              ZILOG SHOPING
             </Link>
             <ul className="md:hidden flex flex-wrap list-none justify-end">
               <li className="inline-block relative">
@@ -138,7 +138,7 @@ const Sidebar = (props) => {
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
-                  to="/kambing"
+                  to="/item"
                 >
                   <div className="grid grid-cols-3">
                       <div className="w-5 h-5 m-auto">
@@ -147,7 +147,7 @@ const Sidebar = (props) => {
                         />
                       </div>                    
                       <div className="col-span-2">
-                        <a>KAMBING</a>
+                        <a>Item</a>
                       </div>                     
                     </div>
                 </Link>
@@ -175,7 +175,7 @@ const Sidebar = (props) => {
                   </div>
                   <div className="border-1 border-black w-9/12 m-auto"/>
                   <div className="font-bold text-1xl">
-                     <p>© 2021 PT. AGRAPANA TEKNOLOGI INDONESIA</p>
+                     <p>© 2022 PT. ZILOG TEKNOLOGI INDONESIA</p>
                   </div>
               </div>}
         </div>

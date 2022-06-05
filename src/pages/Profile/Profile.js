@@ -4,7 +4,9 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import { API, config,BaseURL } from '../../config/API'
 import Modal from "../../components/Modal/Modal"
 import { connect, useDispatch } from 'react-redux'
+import FormAlamat from '../../components/Form/FormAlamat'
 import {FaArrowAltCircleUp} from "react-icons/fa"
+import CardTransaksi from '../../components/Card/CardTransaksi'
 const Profile = ({auth:{users}}) => {
     const [data,setData] = useState({})
     const [kambing,setKambing] = useState([])
@@ -13,34 +15,17 @@ const Profile = ({auth:{users}}) => {
     const [message,setMessage] = useState("")
     const [username,setUsername] = useState("")
     const [fullname,setFullname] = useState("")
-    const [transaksi,setTransaksi] = useState()
+    const [alamat,setAlamat] = useState()
+    const [add,setAdd] = useState(false)
+    const [trigerAdd,setTrigerAdd] = useState(false)
     const history = useHistory()
-    // useEffect(()=>{
-    //     API.get("/profile",config)
-    //     .then((res)=>{
-    //         setData(res.data.data)
-    //         setUsername(res.data.data.username)
-    //         setFullname(res.data.data.fullname)
-    //         setKambing(res.data.kambing)
-    //     })
-    //     .catch((err)=>{
-    //         alert(err)
-    //     })
-    // },[triger])
-    // console.log(users)
     useEffect(()=>{
-        if(users){
-            API.get("/transaksi",config)
-            .then((res)=>{
-                console.log(res.data.data)
-            })
-            .catch((err)=>{
-                alert(err)
-            })
-        }
-        
-    },[users])
-    return users?(
+        API.get("/alamat",config)
+        .then((res)=>{
+            setAlamat(res.data.data)
+        })
+    },[trigerAdd])
+    return users && alamat?(
         <div >
             <div className="md:ml-80 pt-10">
                     <div className="w-11/12 bg-green-600 rounded-xl m-auto bg-red-500"
@@ -125,10 +110,30 @@ const Profile = ({auth:{users}}) => {
                                 </div>
                                 
                             </div>
-                    </div>
+                </div>
             </div>
-            <div className="md:ml-80 pt-10">
-                
+            <div className='md:ml-80 pt-10'>
+                <button className='font-bold w-20 bg-green-200 mb-2 rounded'
+                onClick={()=>setAdd(!add)}
+                >{add?"-":"+"}</button>
+                {add && <FormAlamat trigerAdd={trigerAdd} setTrigerAdd={setTrigerAdd}/>}
+                {alamat.map((data,index)=>(
+                    <>
+                    <div key={index}
+                    className="bg-green-200 w-11/12 m-auto rounded gap-4 grid grid-cols-3 gap-4"
+                    >
+                        <div>
+                            <div><p className='ml-2'>Provinsi : {data.province}</p></div>
+                            <div><p className='ml-2'>Nama Kota : {data.city_name}</p></div>
+                        </div>
+                        <div>
+                            <p className='ml-2'>Detail Alamat : {data.detailAlamat}</p>
+                        </div>
+                        
+                    </div>
+                    <div className='mt-2'/>
+                    </>
+                ))}
             </div>
         </div>
     ):null

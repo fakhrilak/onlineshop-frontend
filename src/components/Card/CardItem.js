@@ -2,6 +2,7 @@ import React from 'react'
 import {FaShoppingCart} from "react-icons/fa"
 import { connect, useDispatch} from 'react-redux'
 import { useHistory } from 'react-router'
+import { BaseURL } from '../../config/API'
 const CardItem = ({data,order,auth:{isAuthenticated,role}}) => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -24,7 +25,7 @@ const CardItem = ({data,order,auth:{isAuthenticated,role}}) => {
                     </div>
                     <div className="h-1 my-1 border-t-2 border-black" />
                     <div>
-                        <img src={data.picture}
+                        <img src={BaseURL+"/single/"+data.picture}
                         className="w-11/12 h-44 rounded m-auto"
                         />
                     </div>
