@@ -1,11 +1,15 @@
 import React,{useEffect, useState} from 'react'
 import {FaArrowDown} from "react-icons/fa"
-import { BaseURL } from '../../config/API'
-const CardTransaksi = ({data}) => {
+import { API, BaseURL, config } from '../../config/API'
+import { connect } from 'react-redux'
+const CardTransaksi = ({data,auth}) => {
     const [show,hansleShow] = useState(false)
     const [harga,setHarga] = useState()
     const [image,setImage] = useState("")
     const [imagepreview,setImagePreview] = useState(null)
+    const [showimgTransact,setshowimgTransact] = useState(false)
+    const [statuss,setStatuss] = useState()
+    const [Message,setMessage] = useState()
     useEffect(()=>{
         if(data){
             let total = 0
@@ -57,7 +61,7 @@ const CardTransaksi = ({data}) => {
             <div
             className="m-2 pb-2 grid grid-cols-3"
             >
-                {data.status == "Witing Payment"?
+                {data.status == "Witing Payment" && auth.role == 2?
                 <div>
                     <p>Please Upload Bukti Transfer</p>
                     <div>
@@ -70,14 +74,87 @@ const CardTransaksi = ({data}) => {
                             className="w-9/12 m-auto"
                             />
                         </div>
+                        <div className='grid grid-cols-2 gap-2'>
                         <button
-                        className='w-20 border-2 border-green-200 rounded mt-2'
+                        onClick={()=>{
+                            const dataSubmit = new FormData()
+                            dataSubmit.append("file",image)
+                            API.post("/transaksi/upload/"+data.id,dataSubmit,config)
+                            .then((res)=>{
+                                alert(res.data.message)
+                                window.location.reload("/transaksi")
+                            })
+                            .catch((err)=>{
+                                alert(err)
+                            })
+                        }}
+                        className='border-2 border-green-200 rounded mt-2'
                         >Upload</button>
+                        <button
+                        className='bg-red-600 rounded mt-2'
+                        onClick={()=>{
+                            API.patch("/transaksi/"+data.id,{message:"",status:"Cancel"},config)
+                            .then((res)=>{
+                                alert(res.data.message)
+                                window.location.reload("/transaksi")
+                            })
+                            .catch((err)=>{
+                                alert(err.response.message)
+                            })
+                        }}
+                        >Cancel</button>
+                        </div>
                     </div>
-                </div>:
+                </div>:data.status == "Witing Payment" && auth.role == 1?
                 <div>
-                    sudah dibayar
-                </div>}
+                    <p onClick={()=>setshowimgTransact(!showimgTransact)}
+                    className="mt-1 ml-2"
+                    >Witing Payment<FaArrowDown size={20} className="float-right"/></p>
+                </div>:data.status == "Pending" && auth.role == 2?
+                <div>
+                    <p onClick={()=>setshowimgTransact(!showimgTransact)}
+                    className="mt-1 ml-2"
+                    >Witing Accept Admin<FaArrowDown size={20} className="float-right"/></p>
+                    {showimgTransact && <img src={BaseURL+"/single/"+data.pictTransfer}/>}
+                </div>:data.status == "Pending" && auth.role == 1?
+                <div>
+                    <p onClick={()=>setshowimgTransact(!showimgTransact)}
+                    className="mt-1 ml-2"
+                    >Witing Accept Admin<FaArrowDown size={20} className="float-right"/></p>
+                    {showimgTransact && <img src={BaseURL+"/single/"+data.pictTransfer}/>}
+                    {showimgTransact &&<div className='w-5/6 mt-2'>
+                        <select
+                        value={statuss}
+                        onChange={(e)=>setStatuss(e.target.value)}
+                        >
+                            <option
+                            value='Accepted'
+                            >Accept</option>
+                            <option
+                            value='Rejected'
+                            >Reject</option>
+                        </select>
+                    </div>}
+                    {showimgTransact && statuss && <div className='mt-2'>
+                    <input
+                    placeholder='Pesan Atau Nomer resi'
+                    value={Message}
+                    onChange={(e)=>setMessage(e.target.value)}
+                    /><button
+                    onClick={()=>{
+                        let datas = {message:Message,status:statuss}
+                        API.patch("/transaksi/"+data.id,datas,config)
+                        .then((res)=>{
+                            alert(res.data.message)
+                            window.location.reload("/transaksi")
+                        })
+                        .catch((err)=>{
+                            alert(err)
+                        })
+                    }}
+                    >Sending</button>
+                    </div>}           
+                </div>:null}
             </div>
         </>
         <>
@@ -138,5 +215,10 @@ const CardTransaksi = ({data}) => {
     </div>
   ):null
 }
-
-export default CardTransaksi
+const mapStateToProps = (state) => ({
+    order: state.order,
+    auth : state.auth
+  });
+  
+export default connect(mapStateToProps, {})(CardTransaksi);
+  

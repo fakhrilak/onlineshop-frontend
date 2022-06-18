@@ -1,7 +1,7 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
 import  User from '../../img/User.jpg'
-import Goat from "../../img/Goat.png";
+import Goat from "../../img/goat.png";
 import {connect,useDispatch} from "react-redux"
 import {BaseURL} from "../../config/API"
 import {useHistory} from "react-router-dom"

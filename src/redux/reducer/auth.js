@@ -35,7 +35,7 @@ export default function (state = initialState, action) {
             case LOGIN_FAIL:
                 return {
                     ...state,
-                    message: payload.message,
+                    message: payload.data.error.message,
                     loading: false,
                     isLogin: false,
                     status : 400

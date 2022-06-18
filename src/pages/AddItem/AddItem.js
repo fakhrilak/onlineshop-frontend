@@ -16,7 +16,6 @@ const AddItem = () => {
             dataSubmit.append([newItem[i]["name"]] , value)
         }
         dataSubmit.append("file",image)
-        console.log(dataSubmit)
         API.post("/item",dataSubmit,config)
         .then((res)=>{
             alert(res.data.message)

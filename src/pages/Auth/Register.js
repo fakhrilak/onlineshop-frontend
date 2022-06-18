@@ -4,12 +4,14 @@ import { SignUp } from "../../redux/actions/Auth";
 import { connect,useDispatch} from "react-redux";
 
 const Register = ({SignUp, auth}) => {
-    const {message, isAuthenticated} = auth
+    const {isAuthenticated} = auth
 
     const [firstname, setFirstname] = useState()
     const [lastname, setLastname] = useState()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+    const [message,setMesaage] =useState(null)
+    const [stayle,setStayle] = useState(null)
     const dispatch = useDispatch()
     // useEffect(()=>{
     //     dispatch({
@@ -20,8 +22,20 @@ const Register = ({SignUp, auth}) => {
     const OnClick = () => {
         SignUp(firstname,lastname, email, password)
     }
-
-
+    console.log(auth.message)
+    useEffect(()=>{
+      return(()=>{
+          setMesaage(auth.message)
+          if(auth.status == 200){
+            setStayle("text-green-500")
+          }else{
+            setStayle("text-red-500")
+          }
+          setInterval(()=>{
+            setMesaage("")
+          },5000)
+      })
+    },[auth])
   return (
     <>
   {
@@ -48,7 +62,7 @@ const Register = ({SignUp, auth}) => {
                   </h6>
                 </div>
                 <div className="btn-wrapper text-center">
-                 
+                    {message && <p className={stayle}>{message}</p>}      
                 </div>
                 <hr className="mt-3 border-b-1 border-blueGray-300" />
               </div>

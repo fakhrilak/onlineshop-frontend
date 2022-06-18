@@ -47,9 +47,10 @@ export const SignUp = (firstname,lastname, email, password) => async(dispatch) =
       dispatch(loadUser())
       window.location.reload("/item")
   }catch(err) {
+    console.log(err.response,"register")
       dispatch({
           type: LOGIN_FAIL,
-          payload: err
+          payload: err.response.data
       })     
   }
 }
@@ -68,11 +69,13 @@ export const loginAction = (email, password) => async(dispatch) => {
             type: LOGIN_SUCCESS,
             payload: res.data.data,
         });
+        dispatch(loadUser())
         window.location.reload("/item")
     }catch(err) {
+        console.log(err)
         dispatch({
             type: LOGIN_FAIL,
-            payload: err.response.data,
+            payload: err.response,
         })
     }
 }

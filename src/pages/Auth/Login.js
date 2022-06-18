@@ -34,10 +34,10 @@ const Login = ({loginAction, auth}) => {
         }
         setInterval(()=>{
           setMesaage("")
-        },3000)
+        },5000)
     })
   },[auth])
-
+  console.log(auth.message)
   return (
     <>
     {
