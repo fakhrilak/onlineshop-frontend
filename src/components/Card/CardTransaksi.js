@@ -1,16 +1,17 @@
 import React,{useEffect, useState} from 'react'
 import {FaArrowDown} from "react-icons/fa"
+import { BaseURL } from '../../config/API'
 const CardTransaksi = ({data}) => {
     const [show,hansleShow] = useState(false)
     const [harga,setHarga] = useState()
-
+    const [image,setImage] = useState("")
+    const [imagepreview,setImagePreview] = useState(null)
     useEffect(()=>{
         if(data){
             let total = 0
         let totalharga = 0
         let berat=0
         for(let i = 0;i<data.saleItems.length;i++){
-            console.log(data.saleItems[i].banyak)
             total += data.saleItems[i].banyak
             totalharga +=data.saleItems[i].totalBayarItem
             berat +=(data.saleItems[i].banyak*data.saleItems[i].Item.berat)
@@ -18,7 +19,12 @@ const CardTransaksi = ({data}) => {
         setHarga({total:total,totalharga:totalharga,berat:berat})
         }
         
-    },[harga])
+    },[])
+    const imageUpload=(e)=>{
+        const file = e.target.files[0]
+        setImage(file)
+        setImagePreview(URL.createObjectURL(file))
+      }
   return data?(
     <div className='w-full bg-green-300 mt-10 rounded'>
             <p className='text-black mr-5 mt-2 mb-2 text-right'>{data.status}
@@ -31,7 +37,7 @@ const CardTransaksi = ({data}) => {
             className="m-2 pb-2 grid grid-cols-3"
             >
                 <div>
-                    <img src={items.Item.picture}
+                    <img src={BaseURL+"/single/"+items.Item.picture}
                     className="w-44 h-44 mb-2 rounded m-auto"
                     />
                 </div>
@@ -47,6 +53,33 @@ const CardTransaksi = ({data}) => {
                 </div>
             </div>
         )):null}
+        <>
+            <div
+            className="m-2 pb-2 grid grid-cols-3"
+            >
+                {data.status == "Witing Payment"?
+                <div>
+                    <p>Please Upload Bukti Transfer</p>
+                    <div>
+                        <input
+                        type='file'
+                        onChange={(e)=>imageUpload(e)}
+                        />
+                        <div className="w-auto text-center pt-10">
+                            <img src={imagepreview}
+                            className="w-9/12 m-auto"
+                            />
+                        </div>
+                        <button
+                        className='w-20 border-2 border-green-200 rounded mt-2'
+                        >Upload</button>
+                    </div>
+                </div>:
+                <div>
+                    sudah dibayar
+                </div>}
+            </div>
+        </>
         <>
             {show && harga?<div className='border-t-2 mt-2 mb-2 border-black'/>:null}
             <div>

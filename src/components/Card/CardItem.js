@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState,useEffect} from 'react'
 import {FaShoppingCart} from "react-icons/fa"
 import { connect, useDispatch} from 'react-redux'
 import { useHistory } from 'react-router'
 import { BaseURL } from '../../config/API'
-const CardItem = ({data,order,auth:{isAuthenticated,role}}) => {
+const CardItem = ({data,order,auth:{isAuthenticated,role},showkeranjang,index}) => {
+
   const dispatch = useDispatch()
   const history = useHistory()
+  console.log(order.ordertransac)
   const validating=(a,b)=>{
     for(let i = 0; i <a.length;i++){
         if(a[i].id == b.id){
@@ -13,7 +15,8 @@ const CardItem = ({data,order,auth:{isAuthenticated,role}}) => {
         }
     }
     return true
-}
+  }
+  
   return (
     <div>
         <div className=" w-11/12 m-auto">
@@ -38,8 +41,10 @@ const CardItem = ({data,order,auth:{isAuthenticated,role}}) => {
                     <div className="ml-2 mt-2 mb-2 mr-2 text-black font-serif text-sm">
                         <p className='text-right'>PO: <strong>{data.PO}</strong></p>
                     </div>
-                    <div><p 
+                    {showkeranjang ?<div><p 
                       className='text-right ml-2 w-6/6 text-right'
+                      >
+                       <FaShoppingCart size={30}
                       onClick={()=>{
                         if(isAuthenticated == true && role == 2){
                           let Databooking = order.order
@@ -50,14 +55,68 @@ const CardItem = ({data,order,auth:{isAuthenticated,role}}) => {
                                     type:"ADD ORDER",
                                     payload : Databooking
                                 })
+                                let orderTotransac=[]
+                                for(let i=0;i<order.order.length;i++){
+                                  orderTotransac.push({
+                                    "itemId":order.order[i].id,
+                                    "banyak":1,
+                                    "harga":order.order[i].sell,
+                                    "PO" : order.order[i].PO,
+                                    "berat" : order.order[i].berat
+                                })
+                                }
+                                dispatch({
+                                  type:"ORDER TRANSAC",
+                                  payload : orderTotransac
+                              })
                             }
                         }
-                        else{
-                          history.push("/login")
-                        }
+                        // else{
+                        //   history.push("/login")
+                        // }
                       }}
-                      ><FaShoppingCart size={30}/></p>
-                    </div>
+                      /></p>
+                    </div> :
+                    <div className='grid grid-cols-3'>
+                      <button
+                      onClick={()=>{
+                        if(isAuthenticated == true && role == 2){
+                          let Databooking = order.ordertransac
+                          Databooking[index].banyak +=1
+                            dispatch({
+                                type:"ORDER TRANSAC",
+                                payload : Databooking
+                            })
+                        }}}
+                      >+</button>
+                      <button>{order.ordertransac[index].banyak}</button>
+                      <button
+                      onClick={()=>{
+                        if(isAuthenticated == true && role == 2){
+                          let Databooking = order.ordertransac
+                          if( Databooking[index].banyak > 1){
+                            Databooking[index].banyak -=1
+                            dispatch({
+                                type:"ORDER TRANSAC",
+                                payload : Databooking
+                            })
+                          }else{
+                            Databooking.splice(index, 1);
+                            dispatch({
+                              type:"ORDER TRANSAC",
+                              payload : Databooking
+                            })
+                            let daa = order.order
+                            daa.splice(index, 1);
+                            dispatch({
+                              type:"ADD ORDER",
+                              payload : daa
+                            })
+                          }
+                        }}}
+                      >-</button>
+                    </div>}
+                    
                 </div>
             </div>
     </div>

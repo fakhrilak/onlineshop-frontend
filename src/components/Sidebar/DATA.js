@@ -11,10 +11,6 @@ export const sidebarAdmin = [
         route : "/item"
     },
     {
-        name : "ANTAR TO DAY",
-        route : "/antartoday"
-    },
-    {
         name : "PROFILE",
         route : "/profile"
     },
@@ -40,9 +36,5 @@ export const sidebarUser = [
     {
         name : "TRANSAKSI",
         route : "/transaksi"
-    },
-    {
-        name : "KERANJANG",
-        route : "/keranjang"
     }
 ]

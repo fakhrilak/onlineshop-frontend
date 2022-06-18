@@ -7,6 +7,8 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import {API, BaseURL, config,Socket} from "../../config/API"
 import {FaArrowAltCircleUp} from "react-icons/fa"
 import CardItem from '../../components/Card/CardItem'
+import FormAddItem from '../../components/Form/FormAddItem'
+import {FaShoppingCart} from "react-icons/fa"
 const Item = ({order,auth}) => {
     const [item,setItem] = useState()
     const [triger,setTriger] = useState(false)
@@ -25,16 +27,15 @@ const Item = ({order,auth}) => {
             console.log(err)
         })
     },[])
-    useEffect(()=>{
-        Socket.on("res-order"+Socket.id,data=>{
-            
-        })
-    },[])
     return (
-        <div>
-        <div className="h-full md:ml-80 pt-10 grid grid-cols-5 gap-3">
-        {item?item.map((data,index)=>(
-                <CardItem key={index} data={data}/>
+        <div className='h-full md:ml-80'>
+        {order.order.length ?<button
+        onClick={()=>history.push("/order")}
+        className='grid grid-cols-2 '
+        ><FaShoppingCart size={30}/> <p className='text-lg'>{order.order.length}</p></button>:null}
+        <div className="pt-10 grid grid-cols-5 gap-3">
+            {item?item.map((data,index)=>(
+                <CardItem key={index} data={data} showkeranjang={true}/>
             )):null}
         </div>
     </div>

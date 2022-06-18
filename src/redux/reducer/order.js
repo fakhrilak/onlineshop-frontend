@@ -1,5 +1,6 @@
 const initialState = {
-    order:[]
+    order:[],
+    ordertransac:[]
 };
 
 export default function (state = initialState, action) {
@@ -15,6 +16,11 @@ export default function (state = initialState, action) {
             return{
                 ...state,
                 order : payload
+            }
+        case "ORDER TRANSAC":
+            return{
+                ...state,
+                ordertransac : payload
             }
         default:
             return state;

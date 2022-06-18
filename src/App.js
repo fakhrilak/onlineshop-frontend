@@ -17,6 +17,7 @@ import Transaksi from './pages/Transaksi/Transaksi'
 import Profile from './pages/Profile/Profile'
 import Notfound from './pages/NotFound/NotFound'
 import AddItem from './pages/AddItem/AddItem.js'
+import Order from './pages/Order/Order.js'
 
 
 
@@ -37,7 +38,7 @@ const App = () => {
                 <Route exact path="/item" component={Item}/>
                 <UserRoute exact path="/transaksi" component={Transaksi}/>
                 <UserRoute exact path="/profile" component={Profile}/>
-
+                <UserRoute exact path="/order" component={Order}/>
 
                 <Route exact path="/login" component ={Login}/>
                 <Route exact path="/additem" component ={AddItem}/>
