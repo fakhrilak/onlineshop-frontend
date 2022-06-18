@@ -16,7 +16,7 @@ import axios from 'axios';
 
 //local prod
 export const socketURL = "https://trymulti.zilog.club/"
-export const BaseURL = "http://192.168.100.38:4200/onlineshop/v1"
+export const BaseURL = "http://v2-blogger-server.zilog.club:4200/onlineshop/v1"
 export const streamURL = "https://trymulti.zilog.club/"
 // export const socketURL = "wss://192.168.20.160:5000/"
 
