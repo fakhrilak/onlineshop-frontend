@@ -10,13 +10,14 @@ import CardItem from '../../components/Card/CardItem'
 import FormAddItem from '../../components/Form/FormAddItem'
 import {FaShoppingCart} from "react-icons/fa"
 import CardEditAndDelet from '../../components/Card/CardEditAndDelet'
-const Item = ({order,auth}) => {
+import CardEditAndEnable from '../../components/Card/CardEditAndEnable'
+const DisabledItem = ({order,auth}) => {
     const [item,setItem] = useState()
     const [triger,setTriger] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory()
     useEffect(()=>{
-        API.get("/item?status=1",config)
+        API.get("/item?status=0",config)
         .then((res)=>{
             setItem(res.data.data)
             console.log(res.data.data)
@@ -39,7 +40,7 @@ const Item = ({order,auth}) => {
             {item?item.map((data,index)=>(
                 <div>
                     <CardItem key={index} data={data} showkeranjang={true}/>
-                    <CardEditAndDelet data={data} setTriger={setTriger} triger={triger}/>
+                    <CardEditAndEnable data={data} setTriger={setTriger} triger={triger}/>
                 </div>
             )):null}
         </div>
@@ -51,5 +52,5 @@ const mapStateToProps = (state) => ({
     auth : state.auth
   });
   
-  export default connect(mapStateToProps, {})(Item);
+export default connect(mapStateToProps, {})(DisabledItem);
   

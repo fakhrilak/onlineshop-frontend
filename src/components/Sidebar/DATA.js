@@ -7,8 +7,12 @@ import transaction from "../../img/transaction.png"
 
 export const sidebarAdmin = [
     {
-        name : "ITEM",
+        name : "ITEMS",
         route : "/item"
+    },
+    {
+        name : "ENABLED ITEMS",
+        route : "/enableditems"
     },
     {
         name : "PROFILE",

@@ -18,6 +18,7 @@ import Profile from './pages/Profile/Profile'
 import Notfound from './pages/NotFound/NotFound'
 import AddItem from './pages/AddItem/AddItem.js'
 import Order from './pages/Order/Order.js'
+import DisabledItems from './pages/Item/DisabledItems.js'
 
 
 
@@ -42,6 +43,7 @@ const App = () => {
 
                 <Route exact path="/login" component ={Login}/>
                 <Route exact path="/additem" component ={AddItem}/>
+                <Route exact path="/enableditems" component ={DisabledItems}/>
                 <Route exact path="/register" component ={Register}/>
                 <Route exact path="/" component={Home}/>
                 <Route path='*' exact={true} component={Notfound} />

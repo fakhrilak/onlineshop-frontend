@@ -45,7 +45,7 @@ const Sidebar = (props) => {
               className="md:block md:pb-2 text-lg text-blueGray-600 mr-0 inline-block whitespace-nowrap uppercase font-bold p-4 px-0"
               to="/item"
             >
-              ZILOG SHOPING
+              SHOPING
             </Link>
             <ul className="md:hidden flex flex-wrap list-none justify-end">
               <li className="inline-block relative">
@@ -175,7 +175,7 @@ const Sidebar = (props) => {
                   </div>
                   <div className="border-1 border-black w-9/12 m-auto"/>
                   <div className="font-bold text-1xl">
-                     <p>© 2022 PT. ZILOG TEKNOLOGI INDONESIA</p>
+                     <p>© 2022 PT. Hibson Wiraprakarsa</p>
                   </div>
               </div>}
         </div>

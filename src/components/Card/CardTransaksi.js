@@ -160,6 +160,24 @@ const CardTransaksi = ({data,auth}) => {
         <>
             {show && harga?<div className='border-t-2 mt-2 mb-2 border-black'/>:null}
             <div>
+                <p className='ml-2'>Info Pembayaran</p>
+                <div className='grid grid-cols-3 gap-4 text-left ml-5'>
+                    <p className=''>BCA</p>
+                    <p  className=''>
+                        071567895
+                    </p>
+                </div>
+                <div className='grid grid-cols-3 gap-4 text-left ml-5'>
+                    <p className=''>ATAS NAMA</p>
+                    <p  className=''>
+                        PT. Hibson Wiraprakarsa
+                    </p>
+                </div>
+            </div>
+        </>
+        <>
+            {show && harga?<div className='border-t-2 mt-2 mb-2 border-black'/>:null}
+            <div>
                 <p className='ml-2'>Info Pengiriman</p>
                 <div className='grid grid-cols-3 gap-4 text-left ml-5'>
                     <p className=''>Kurir</p>
