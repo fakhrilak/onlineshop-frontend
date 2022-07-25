@@ -39,7 +39,9 @@ const Item = ({order,auth}) => {
             {item?item.map((data,index)=>(
                 <div>
                     <CardItem key={index} data={data} showkeranjang={true}/>
-                    <CardEditAndDelet data={data} setTriger={setTriger} triger={triger}/>
+                    {auth.role ? 
+                    <>{auth.role ==1 && <CardEditAndDelet data={data} setTriger={setTriger} triger={triger}/>}</>
+                    :null}
                 </div>
             )):null}
         </div>
